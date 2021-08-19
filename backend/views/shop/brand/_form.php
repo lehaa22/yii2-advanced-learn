@@ -10,6 +10,8 @@ use yii\widgets\ActiveForm;
 
 <div class="brand-form">
 
+    <?php $form = ActiveForm::begin(); ?>
+
     <div class="box box-default">
         <div class="box-header with-border">Common</div>
         <div class="box-body">
