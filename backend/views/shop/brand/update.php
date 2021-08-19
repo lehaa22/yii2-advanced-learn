@@ -7,12 +7,11 @@ use yii\helpers\Html;
 
 $this->title = 'Update Brand: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Brands', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
+//TODO: Getting unknown property: core\forms\manage\Shop\BrandForm::id
+$this->params['breadcrumbs'][] = ['label' => $model->name/*, 'url' => ['view', 'id' => $model->id]*/];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="brand-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
