@@ -8,7 +8,14 @@ use yii\helpers\Html;
 <header class="main-header">
 
     <?= Html::a('<span class="logo-mini">APP</span><span class="logo-lg">' . Yii::$app->name . '</span>', Yii::$app->homeUrl, ['class' => 'logo']) ?>
-
+    <style>
+        .navbar-static-top:before {
+            content: none;
+        }
+        .navbar-static-top:after {
+            content: none;
+        }
+    </style>
     <nav class="navbar navbar-static-top" role="navigation">
 
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
@@ -17,7 +24,7 @@ use yii\helpers\Html;
 
         <div class="navbar-custom-menu">
 
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="flex-direction: row">
 
                 <!-- Messages: style can be found in dropdown.less-->
                 <li class="dropdown messages-menu">

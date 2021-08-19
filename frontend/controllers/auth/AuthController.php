@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers\auth;
 
+use core\repositories\UserRepository;
 use core\services\auth\AuthService;
 use Yii;
 use yii\web\Controller;
@@ -10,11 +11,11 @@ class AuthController extends Controller
 {
     private $service;
 
-    public function __construct($id, $module, AuthService $service, $config = [])
+    public function __construct($id, $module,  $config = [])
     {
 
         parent::__construct($id, $module, $config);
-        $this->service = $service;
+        $this->service = new AuthService(new UserRepository());
     }
 
     /**

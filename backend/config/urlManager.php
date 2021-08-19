@@ -9,6 +9,7 @@ return [
     'showScriptName' => false,
     'rules' => [
         '' => 'site/index',
+        'site/login' => '/login',
         '<_a:login|logout>' => 'auth/<_a>',
 
         '<_c:[\w\-]+>' => '<_c>/index',

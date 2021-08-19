@@ -123,7 +123,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getNetworks(): ActiveQuery
     {
-        return $this->hasMany(Network::className(), ['user_id' => 'id']);
+        return $this->hasMany(Network::class, ['user_id' => 'id']);
     }
 
     /**
@@ -140,9 +140,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
             [
-                'class' => SaveRelationsBehavior::className(),
+                'class' => SaveRelationsBehavior::class,
                 'relations' => ['networks'],
             ],
         ];
@@ -256,6 +256,7 @@ class User extends ActiveRecord implements IdentityInterface
      * Generates password hash from password and sets it to the model
      *
      * @param string $password
+     * @throws yii\base\Exception
      */
     private function setPassword($password)
     {

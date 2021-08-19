@@ -1,4 +1,7 @@
 <?php
+
+use core\entities\User\User;
+
 $params = array_merge(
     require __DIR__ . '/../../common/config/params.php',
     require __DIR__ . '/../../common/config/params-local.php',
@@ -17,17 +20,17 @@ return [
             'cookieValidationKey' => $params['cookieValidationKey'],
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
+            'identityClass' => User::class,
             'enableAutoLogin' => true,
             'identityCookie' => [
-                'name' => '_identity-frontend',
+                'name' => '_identity',
                 'httpOnly' => true,
                 'domain' => $params['cookieDomain']
             ],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
+            'name' => '_session',
             'cookieParams' => [
                 'domain' => $params['cookieDomain'],
                 'httpOnly' => true,

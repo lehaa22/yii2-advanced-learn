@@ -1,6 +1,7 @@
 <?php
 namespace backend\controllers;
 
+use yii\filters\AccessControl;
 use yii\web\Controller;
 
 /**
@@ -14,6 +15,20 @@ class SiteController extends Controller
     public function actions()
     {
         return [
+            'access' => [
+                'class' => AccessControl::class,
+                'rules' => [
+                    [
+                        'actions' => ['login', 'error'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],

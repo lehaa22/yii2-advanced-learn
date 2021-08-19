@@ -1,11 +1,11 @@
 <?php
 namespace frontend\controllers\auth;
 
-use shop\services\auth\SignupService;
+use core\services\auth\SignupService;
 use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use shop\forms\auth\SignupForm;
+use core\forms\auth\SignupForm;
 
 class SignupController extends Controller
 {
@@ -21,7 +21,7 @@ class SignupController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'only' => ['index'],
                 'rules' => [
                     [
