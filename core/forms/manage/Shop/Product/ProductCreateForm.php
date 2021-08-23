@@ -2,10 +2,12 @@
 
 namespace core\forms\manage\Shop\Product;
 
+use core\entities\Shop\Brand;
 use core\entities\Shop\Characteristic;
 use core\entities\Shop\Product\Product;
 use core\forms\manage\MetaForm;
 use elisdn\compositeForm\CompositeForm;
+use yii\helpers\ArrayHelper;
 
 /**
  * @property PriceForm $price
@@ -33,6 +35,11 @@ class ProductCreateForm extends CompositeForm
             return new ValueForm($characteristic);
         }, Characteristic::find()->orderBy('sort')->all());
         parent::__construct($config);
+    }
+
+    public function brandsList(): array
+    {
+        return ArrayHelper::map(Brand::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
     public function rules(): array

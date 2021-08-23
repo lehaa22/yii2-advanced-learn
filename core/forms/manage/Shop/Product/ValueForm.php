@@ -24,6 +24,17 @@ class ValueForm extends Model
         parent::__construct($config);
     }
 
+    public function variantsList(): array
+    {
+        return $this->_characteristic->variants ? array_combine($this->_characteristic->variants, $this->_characteristic->variants) : [];
+    }
+
+
+    public function getId(): int
+    {
+        return $this->_characteristic->id;
+    }
+
     public function rules(): array
     {
         return array_filter([
@@ -40,10 +51,5 @@ class ValueForm extends Model
         return [
             'value' => $this->_characteristic->name,
         ];
-    }
-
-    public function getId(): int
-    {
-        return $this->_characteristic->id;
     }
 }

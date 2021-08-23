@@ -3,6 +3,7 @@
 namespace core\forms\manage\Shop\Product;
 
 use core\entities\Shop\Product\Product;
+use core\entities\Shop\Tag;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 
@@ -20,6 +21,11 @@ class TagsForm extends Model
             $this->existing = ArrayHelper::getColumn($product->tagAssignments, 'tag_id');
         }
         parent::__construct($config);
+    }
+
+    public function tagsList(): array
+    {
+        return ArrayHelper::map(Tag::find()->orderBy('name')->asArray()->all(), 'id', 'name');
     }
 
     public function rules(): array

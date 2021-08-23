@@ -1,6 +1,6 @@
 <?php
 
-namespace shop\services\manage\Shop;
+namespace core\services\manage\Shop;
 
 use core\entities\Meta;
 use core\entities\Shop\Product\Product;
@@ -8,6 +8,7 @@ use core\entities\Shop\Tag;
 use core\forms\manage\Shop\Product\CategoriesForm;
 use core\forms\manage\Shop\Product\ModificationForm;
 use core\forms\manage\Shop\Product\PhotosForm;
+use core\forms\manage\Shop\Product\PriceForm;
 use core\forms\manage\Shop\Product\ProductCreateForm;
 use core\forms\manage\Shop\Product\ProductEditForm;
 use core\repositories\Shop\BrandRepository;
@@ -139,6 +140,13 @@ class ProductManageService
             }
             $this->products->save($product);
         });
+    }
+
+    public function changePrice($id, PriceForm $form): void
+    {
+        $product = $this->products->get($id);
+        $product->setPrice($form->new, $form->old);
+        $this->products->save($product);
     }
 
     public function addPhotos($id, PhotosForm $form): void

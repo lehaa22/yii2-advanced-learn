@@ -2,6 +2,7 @@
 
 namespace core\entities\Shop\Product;
 
+use core\entities\Shop\Tag;
 use lhs\Yii2SaveRelationsBehavior\SaveRelationsBehavior;
 use core\entities\behaviors\MetaBehavior;
 use core\entities\Meta;
@@ -27,13 +28,16 @@ use yii\web\UploadedFile;
  * @property Meta $meta
  * @property Brand $brand
  * @property Category $category
+ * @property Category[] $categories
  * @property CategoryAssignment[] $categoryAssignments
  * @property Value[] $values
  * @property Photo[] $photos
+ * @property Photo $mainPhoto
  * @property TagAssignment[] $tagAssignments
  * @property RelatedAssignment[] $relatedAssignments
  * @property Modification[] $modifications
  * @property Review[] $reviews
+ * @property Tag[] $tags
  */
 class Product extends ActiveRecord
 {
@@ -418,6 +422,20 @@ class Product extends ActiveRecord
         return $this->hasOne(Photo::class, ['id' => 'main_photo_id']);
     }
 
+    public function getCategories(): ActiveQuery
+    {
+        return $this->hasMany(Category::class, ['id' => 'category_id'])->via('categoryAssignments');
+    }
+
+    public function getTags(): ActiveQuery
+    {
+        return $this->hasMany(Tag::class, ['id' => 'tag_id'])->via('tagAssignments');
+    }
+
+    public function getRelateds(): ActiveQuery
+    {
+        return $this->hasMany(Product::class, ['id' => 'related_id'])->via('relatedAssignments');
+    }
 
     public static function tableName(): string
     {
@@ -440,6 +458,17 @@ class Product extends ActiveRecord
         return [
             self::SCENARIO_DEFAULT => self::OP_ALL,
         ];
+    }
+
+    public function beforeDelete(): bool
+    {
+        if (parent::beforeDelete()) {
+            foreach ($this->photos as $photo) {
+                $photo->delete();
+            }
+            return true;
+        }
+        return false;
     }
 
     public function afterSave($insert, $changedAttributes): void
