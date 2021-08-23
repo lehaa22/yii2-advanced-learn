@@ -11,6 +11,10 @@ $params = array_merge(
 
 return [
     'id' => 'app-backend',
+    'aliases' => [
+        '@staticRoot' => $params['staticPath'],
+        '@static'   => $params['staticHostInfo'],
+    ],
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
     'bootstrap' => ['log','common\bootstrap\SetUp'],
